@@ -1,4 +1,4 @@
-namespace Labb1_webAPI.Models
+namespace Labb1_MVC.Models
 {
     public class ErrorViewModel
     {

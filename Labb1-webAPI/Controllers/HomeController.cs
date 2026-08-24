@@ -1,8 +1,8 @@
-using Labb1_webAPI.Models;
+using Labb1_MVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace Labb1_webAPI.Controllers
+namespace Labb1_MVC.Controllers
 {
     public class HomeController : Controller
     {

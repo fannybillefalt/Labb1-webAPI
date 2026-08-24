@@ -1,4 +1,4 @@
-namespace Labb1_webAPI
+namespace Labb1_MVC
 {
     public class Program
     {
