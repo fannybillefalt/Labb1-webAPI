@@ -7,6 +7,6 @@ namespace Labb1_MVC.Services
     public interface IPokemonService
     {
         Task<List<Pokemon>> GetAllAsync();
-        Task<Pokemon?> GetByIdAsync(int id);
+        Task<Pokemon?> GetByNameAsync(string name);
     }
 }

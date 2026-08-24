@@ -32,11 +32,11 @@ namespace Labb1_MVC.Services
             }
         }
 
-        public async Task<Pokemon?> GetByIdAsync(int id)
+        public async Task<Pokemon?> GetByNameAsync(string name)
         {
             try
             {
-                var response = await _httpClient.GetAsync($"pokemon/{id}");
+                var response = await _httpClient.GetAsync($"pokemon/{name}");
 
                 if (!response.IsSuccessStatusCode)
                 {
