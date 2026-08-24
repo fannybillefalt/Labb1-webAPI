@@ -22,6 +22,17 @@ namespace Labb1_MVC.Controllers
             return View(pokemon);
         }
 
-       
+        public async Task<IActionResult> Details(int id)
+        {
+            var pokemon = await _pokemonService.GetByIdAsync(id);
+
+            if (pokemon == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return View(pokemon);
+        }
+
     }
 }

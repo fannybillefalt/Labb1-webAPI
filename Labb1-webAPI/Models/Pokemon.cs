@@ -7,6 +7,8 @@ namespace Labb1_MVC.Models
 
     public class Pokemon
     {
+        public int Id { get; set; }
+
         [JsonPropertyName("name")]
         public string Name { get; set; } = string.Empty;
 

@@ -31,6 +31,27 @@ namespace Labb1_MVC.Services
                 return new List<Pokemon>();
             }
         }
+
+        public async Task<Pokemon?> GetByIdAsync(int id)
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync($"pokemon/{id}");
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return null;
+                }
+
+                var json = await response.Content.ReadAsStringAsync();
+
+                return JsonSerializer.Deserialize<Pokemon>(json);
+            }
+            catch
+            {
+                return null;
+            }
+        }
     }
 
     internal class PokemonApiResponse
