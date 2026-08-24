@@ -1,5 +1,9 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model Labb1_MVC.Models.Pokemon
+
+<h1>@Model.Name</h1>
+
+<p>Id: @Model.Id</p>
+<p>Height: @Model.Height</p>
+<p>Weight: @Model.Weight</p>
+
+<a asp-action="Index">Tillbaka till listan</a>

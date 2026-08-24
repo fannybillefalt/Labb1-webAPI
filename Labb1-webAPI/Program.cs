@@ -1,3 +1,5 @@
+using Labb1_MVC.Services;
+
 namespace Labb1_MVC
 {
     public class Program
@@ -8,6 +10,10 @@ namespace Labb1_MVC
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddHttpClient<IPokemonService, PokemonService>(client =>
+            {
+                client.BaseAddress = new Uri("https://pokeapi.co/api/v2/");
+            });
 
             var app = builder.Build();
 
