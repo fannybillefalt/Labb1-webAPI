@@ -2,6 +2,27 @@
 
 <h1>Pokémon</h1>
 
+<form asp-action="Search" method="get">
+    <input type="text" name="query" placeholder="Sök Pokémon..." />
+    <button type="submit">Sök</button>
+</form>
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <p style="color:red">@ViewBag.ErrorMessage</p>
+}
+
+<ul>
+    @foreach (var pokemon in Model)
+    {
+        <li>
+            <a asp-action="Details" asp-route-name="@pokemon.Name">
+                @pokemon.Name
+            </a>
+        </li>
+    }
+</ul>
+
 <ul>
     @foreach (var pokemon in Model)
     {

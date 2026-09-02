@@ -14,43 +14,28 @@ namespace Labb1_MVC.Services
 
         public async Task<List<Pokemon>> GetAllAsync()
         {
-            try
-            {
-                var response = await _httpClient.GetAsync("pokemon");
+            var response = await _httpClient.GetAsync("pokemon");
+            response.EnsureSuccessStatusCode(); // kastar HttpRequestException om t.ex. 500/timeout
 
-                response.EnsureSuccessStatusCode();
+            var json = await response.Content.ReadAsStringAsync();
+            var data = JsonSerializer.Deserialize<PokemonApiResponse>(json);
 
-                var json = await response.Content.ReadAsStringAsync();
-
-                var data = JsonSerializer.Deserialize<PokemonApiResponse>(json);
-
-                return data.Results;
-            }
-            catch (Exception)
-            {
-                return new List<Pokemon>();
-            }
+            return data?.Results ?? new List<Pokemon>();
         }
 
         public async Task<Pokemon?> GetByNameAsync(string name)
         {
-            try
+            var response = await _httpClient.GetAsync($"pokemon/{name}");
+
+            if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
             {
-                var response = await _httpClient.GetAsync($"pokemon/{name}");
-
-                if (!response.IsSuccessStatusCode)
-                {
-                    return null;
-                }
-
-                var json = await response.Content.ReadAsStringAsync();
-
-                return JsonSerializer.Deserialize<Pokemon>(json);
+                return null; // giltigt "hittades inte" - inte ett tekniskt fel
             }
-            catch
-            {
-                return null;
-            }
+
+            response.EnsureSuccessStatusCode(); // andra fel (500, timeout etc) kastas som HttpRequestException
+
+            var json = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<Pokemon>(json);
         }
     }
 

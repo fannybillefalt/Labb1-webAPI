@@ -1,3 +1,4 @@
+using Labb1_MVC.Middleware;
 using Labb1_MVC.Services;
 
 namespace Labb1_MVC
@@ -26,6 +27,7 @@ namespace Labb1_MVC
             }
 
             app.UseHttpsRedirection();
+            app.UseMiddleware<ErrorHandlingMiddleware>();
             app.UseRouting();
 
             app.UseAuthorization();

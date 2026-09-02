@@ -33,6 +33,25 @@ namespace Labb1_MVC.Controllers
 
             return View(pokemon);
         }
+        public async Task<IActionResult> Search(string query)
+        {
+            if (string.IsNullOrWhiteSpace(query))
+            {
+                return RedirectToAction("Index");
+            }
 
+            var allPokemon = await _pokemonService.GetAllAsync();
+
+            var matches = allPokemon
+                .Where(p => p.Name.Contains(query.Trim(), StringComparison.OrdinalIgnoreCase))
+                .ToList();
+
+            if (!matches.Any())
+            {
+                return NotFound();
+            }
+
+            return View("Index", matches);
+        }
     }
 }
